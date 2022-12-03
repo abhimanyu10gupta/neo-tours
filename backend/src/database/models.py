@@ -29,3 +29,62 @@ def setup_db(app, database_path=DB_PATH):
     migrate = Migrate(app, db)
     db.init_app(app)
     db.create_all()
+
+# ----------------------------------------------------------------------------#
+# Models.
+# ----------------------------------------------------------------------------#
+
+
+class Tours(db.Model):
+    __tablename__ = 'tours'
+    title = db.Column(db.String(120))
+    start_date = db.Column(db.String(120))
+    end_date = db.Column(db.String(120))
+    description = db.Column(db.String(1240))
+    days = db.Column(db.Integer)
+    nights = db.Column(db.Integer)
+    max_people = db.Column(db.Integer)
+    inbound = db.Column(db.String(30))
+    outbound = db.Column(db.String(30))
+    min_age = db.Column(db.Integer)
+
+    def get_title(self):
+        return self.title
+
+    def __str__(self):
+        return self.get_title()
+
+
+class Booking(db.Model):
+    booking_date = db.Column(db.String(120))
+    price = db.Column(db.Integer)
+    # user =
+    # tour =
+
+    def __str__(self):
+        return self.price
+
+
+class Yachts(db.Model):
+    __tablename__ = 'yachts'
+
+
+class User(db.Model):
+    __tablename__ = 'users'
+    # username = db.Column(db.String(80), unique=True, nullable=False)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+    first_name = db.Column(db.String(120), nullable=False)
+    last_name = db.Column(db.String(120), nullable=False)
+    phone = db.Column(db.String(12))
+    dob = db.Column(db.String(10))
+    address = db.Column(db.String(120))
+
+    def get_full_name(self):
+        full_name = self.first_name + ' ' + self.last_name
+        return full_name.strip()
+
+    def get_short_name(self):
+        return self.email
+
+    def __str__(self):
+        return self.get_full_name()

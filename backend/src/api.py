@@ -8,7 +8,9 @@ import traceback
 from .database.models import setup_db
 # from .auth.auth import AuthError, requires_auth
 
-
+# ----------------------------------------------------------------------------#
+# App Config.
+# ----------------------------------------------------------------------------#
 app = Flask(__name__)
 
 with app.app_context():
@@ -26,11 +28,18 @@ def after_request(response):
                          'GET, POST, PATCH, DELETE, OPTIONS')
     return response
 
+# ----------------------------------------------------------------------------#
+# Controllers.
+# ----------------------------------------------------------------------------#
+
 
 @app.route('/')
 def index():
     return "HELLO!!! You are doing it!!!!!"
 
 
+# ----------------------------------------------------------------------------#
+# Launch.
+# ----------------------------------------------------------------------------#
 if __name__ == '__main__':
     app.run()
